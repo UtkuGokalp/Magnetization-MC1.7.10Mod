@@ -1,2 +1,1 @@
-# Magnetization-MC1.7.10Mod
-A Minecraft 1.7.10 mod I developed because I didn't like the magnets of any other mods and I was curious about how to make a mod for minecraft (albeit for an 11 years old version of it).
+This project was built with (ForgeGradle-1.2 by anatawa12)[https://github.com/anatawa12/ForgeGradle-1.2]. First you will need to setup the environment for that project. Once you have done that, you can use the files from this repository to replace the ones that came with ForgeGradle-1.2.
