@@ -1,0 +1,16 @@
+[
+{
+  "modid": "magnetization",
+  "name": "Magnetization",
+  "description": "A mod that just adds a magnet",
+  "version": "1.0",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["HeroOfSkies"],
+  "credits": "Thanks to MrCrayFish and ChatGPT (yes I did actually use ChatGPT)",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
