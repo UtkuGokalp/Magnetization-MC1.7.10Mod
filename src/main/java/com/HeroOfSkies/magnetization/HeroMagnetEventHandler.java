@@ -149,15 +149,13 @@ public class HeroMagnetEventHandler
 			{
 				continue;
 			}
-			
-			boolean inserted = player.inventory.addItemStackToInventory(stack);
-			if (inserted)
+			if (!player.worldObj.isRemote) //do it only if executing from server
 			{
-				player.inventoryContainer.detectAndSendChanges();
-				item.setDead();
-				indicesToRemove.add(index);
-				World world = player.worldObj;
-				world.playSoundAtEntity(player, "random.pop", 0.2f, (world.rand.nextFloat() - world.rand.nextFloat()) * 0.7F + 1.0F);
+				item.delayBeforeCanPickup = 0;
+				item.setPosition(player.posX, player.posY, player.posZ);
+				//At this point the player might not have picked up the item (inventory full or for some other reason)
+				//so don't update indices to remove. If it is picked up, it will be set dead and it will be added to
+				//indices to remove on the next iteration of the loop.
 			}
 		}
 		
