@@ -1,0 +1,3 @@
+# Output directories of gradle
+.gradle/
+build/
