@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 
-@Mod(modid = "magnetization", name = "Magnetization", version = "1.0", acceptedMinecraftVersions = "1.7.10")
+@Mod(modid = "magnetization", name = "Magnetization", version = "1.1", acceptedMinecraftVersions = "1.7.10")
 public class Magnetization
 {
 	public static Item heroMagnet;

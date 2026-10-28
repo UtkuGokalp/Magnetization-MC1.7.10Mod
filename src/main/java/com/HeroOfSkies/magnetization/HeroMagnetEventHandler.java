@@ -152,7 +152,13 @@ public class HeroMagnetEventHandler
 			if (!player.worldObj.isRemote) //do it only if executing from server
 			{
 				item.delayBeforeCanPickup = 0;
-				item.setPosition(player.posX, player.posY, player.posZ);
+				item.setPosition(player.posX,
+								 player.posY + player.height * 0.2, //When trying to pull the items to the player's feet, they collide with the ground (I think) and fly around. Pulling them to player's chest seems to fix that issue
+								 player.posZ);
+				//Make sure the item won't jump around and actually will stay at player's position
+				item.motionX = 0.0;
+				item.motionY = 0.0;
+				item.motionZ = 0.0;
 				//At this point the player might not have picked up the item (inventory full or for some other reason)
 				//so don't update indices to remove. If it is picked up, it will be set dead and it will be added to
 				//indices to remove on the next iteration of the loop.
