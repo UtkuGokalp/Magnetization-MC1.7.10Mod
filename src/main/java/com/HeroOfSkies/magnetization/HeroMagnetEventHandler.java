@@ -152,13 +152,12 @@ public class HeroMagnetEventHandler
 			if (!player.worldObj.isRemote) //do it only if executing from server
 			{
 				item.delayBeforeCanPickup = 0;
-				item.setPosition(player.posX,
-								 player.posY + player.height * 0.2, //When trying to pull the items to the player's feet, they collide with the ground (I think) and fly around. Pulling them to player's chest seems to fix that issue
-								 player.posZ);
-				//Make sure the item won't jump around and actually will stay at player's position
-				item.motionX = 0.0;
-				item.motionY = 0.0;
-				item.motionZ = 0.0;
+				double itemSpeed = 1.0;
+				item.motionX = (player.posX - item.posX) * itemSpeed;
+				item.motionY = (player.posY + player.height * 0.5 - item.posY) * itemSpeed;
+				item.motionZ = (player.posZ - item.posZ) * itemSpeed;
+				item.isAirBorne = true;
+				
 				//At this point the player might not have picked up the item (inventory full or for some other reason)
 				//so don't update indices to remove. If it is picked up, it will be set dead and it will be added to
 				//indices to remove on the next iteration of the loop.
@@ -168,7 +167,10 @@ public class HeroMagnetEventHandler
 		indicesToRemove.sort(Collections.reverseOrder()); //Sort the indices from max to min (descending) so that there won't be index shifting issues
 		for (int idx : indicesToRemove)
 		{
-			toPickup.remove(idx);
+			if (toPickup.get(idx).item.isDead)
+			{
+				toPickup.remove(idx);
+			}
 		}
 	}
 	
@@ -186,7 +188,7 @@ public class HeroMagnetEventHandler
 	private double getItemDistanceToPlayer(EntityItem item, EntityPlayer player)
 	{
 		double dX = Math.abs(player.posX - item.posX);
-		double dY = Math.abs(player.posY - item.posY);
+		double dY = Math.abs(player.posY + player.getEyeHeight() - item.posY);
 		double dZ = Math.abs(player.posZ - item.posZ);
 		double magnitude = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
 		return magnitude;
